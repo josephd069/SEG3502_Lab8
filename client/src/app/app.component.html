@@ -1,1 +1,41 @@
-<router-outlet></router-outlet>
+
+<div class="application">
+
+  <header class="entete">
+    <div class="entete-interieur">
+
+      <div class="marque">
+        <span class="marque-icone" aria-hidden="true">GE</span>
+
+        <div>
+          <strong>Gestion des employés</strong>
+          <small>SEG 3502 · Laboratoire 8</small>
+        </div>
+      </div>
+
+      <nav class="navigation"
+           aria-label="Navigation principale">
+
+        <a routerLink="/employee"
+           routerLinkActive="actif">
+          Ajouter un employé
+        </a>
+
+        <a routerLink="/employees"
+           routerLinkActive="actif">
+          Liste des employés
+        </a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenu-principal">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="pied-page">
+    SEG 3502 · Services Web GraphQL
+  </footer>
+
+</div>

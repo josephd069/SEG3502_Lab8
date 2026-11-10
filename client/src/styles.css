@@ -1,1 +1,353 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Style général */
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1e293b;
+  background: #f2f6f8;
+}
+
+body {
+  margin: 0;
+  background: #f2f6f8;
+}
+
+.application {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* En-tête */
+.entete {
+  background: #ffffff;
+  border-bottom: 1px solid #dfe9ed;
+  box-shadow: 0 3px 18px rgba(23, 62, 78, 0.04);
+}
+
+.entete-interieur {
+  width: min(1100px, 94%);
+  margin: 0 auto;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.marque {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.marque-icone {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #176b75;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.marque strong {
+  display: block;
+  font-size: 19px;
+  color: #173449;
+}
+
+.marque small {
+  display: block;
+  color: #72828f;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.navigation a {
+  color: #3e5969;
+  text-decoration: none;
+  padding: 11px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.navigation a:hover {
+  background: #edf6f6;
+  color: #176b75;
+}
+
+.navigation a.actif {
+  background: #dff1ef;
+  color: #176b75;
+}
+
+/* Contenu principal */
+.contenu-principal {
+  width: min(1000px, 94%);
+  margin: 42px auto 60px;
+  flex: 1;
+}
+
+.page {
+  width: 100%;
+}
+
+.introduction {
+  margin-bottom: 24px;
+}
+
+.sur-titre {
+  color: #167882;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.introduction h1 {
+  font-size: clamp(28px, 4vw, 38px);
+  margin: 9px 0 8px;
+  font-weight: 800;
+  color: #173449;
+}
+
+.introduction p {
+  margin: 0;
+  color: #6e7d8b;
+  line-height: 1.65;
+}
+
+.introduction-liste {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Cartes */
+.carte {
+  background: #ffffff;
+  border: 1px solid #e2eaee;
+  box-shadow: 0 16px 36px rgba(37, 68, 85, 0.07);
+  padding: 32px;
+  border-radius: 20px;
+}
+
+/* Formulaire */
+.grille-formulaire {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.champ label {
+  display: block;
+  font-weight: 700;
+  color: #284659;
+  margin-bottom: 9px;
+}
+
+.form-control,
+.form-select {
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid #cddde3;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #17808a;
+  box-shadow: 0 0 0 3px rgba(23, 128, 138, 0.12);
+}
+
+.obligatoire {
+  color: #c64c5d;
+}
+
+.erreur-champ {
+  color: #a33444;
+  font-size: 13px;
+  margin: 7px 0 0;
+}
+
+.message-erreur {
+  margin: 22px 0 0;
+  color: #9c2f3d;
+  background: #fff0f1;
+  border-radius: 9px;
+  padding: 12px 14px;
+}
+
+.actions-formulaire {
+  border-top: 1px solid #e6edf0;
+  margin-top: 28px;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.actions-formulaire span {
+  font-size: 13px;
+}
+
+/* Boutons */
+.bouton-principal,
+.bouton-secondaire {
+  border: 0;
+  border-radius: 11px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.15s ease;
+}
+
+.bouton-principal {
+  background: #176b75;
+  color: #ffffff;
+}
+
+.bouton-principal:hover {
+  background: #10535b;
+  color: #ffffff;
+}
+
+.bouton-principal:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bouton-secondaire {
+  background: #e5f3f2;
+  color: #176b75;
+}
+
+/* Tableau des employés */
+.carte-tableau {
+  padding: 0;
+  overflow: hidden;
+}
+
+.en-tete-tableau {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 26px;
+  border-bottom: 1px solid #e9eff1;
+}
+
+.en-tete-tableau h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #173449;
+}
+
+.compteur {
+  background: #e5f3f2;
+  color: #176b75;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tableau-employes {
+  margin: 0;
+  font-size: 14px;
+}
+
+.tableau-employes th {
+  background: #f3f8f9;
+  color: #547080;
+  white-space: nowrap;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 17px 18px;
+}
+
+.tableau-employes td {
+  color: #40586b;
+  padding: 18px;
+  vertical-align: middle;
+  border-color: #e9eff1;
+}
+
+.tableau-employes tbody tr:hover td {
+  background: #f7fbfb;
+}
+
+/* Liste vide */
+.etat-vide {
+  padding: 62px 24px;
+  text-align: center;
+}
+
+.icone-vide {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.etat-vide h2 {
+  font-size: 22px;
+  color: #173449;
+}
+
+.etat-vide p {
+  color: #718391;
+  margin-bottom: 20px;
+}
+
+/* Pied de page */
+.pied-page {
+  color: #8194a0;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* Adaptation aux petits écrans */
+@media (max-width: 720px) {
+
+  .entete-interieur {
+    padding: 18px 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contenu-principal {
+    margin-top: 28px;
+  }
+
+  .grille-formulaire {
+    grid-template-columns: 1fr;
+  }
+
+  .carte {
+    padding: 22px;
+  }
+
+  .carte-tableau {
+    padding: 0;
+  }
+
+  .introduction-liste,
+  .actions-formulaire {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

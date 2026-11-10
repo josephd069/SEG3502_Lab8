@@ -1,21 +1,16 @@
-import {Component} from '@angular/core';
-import {EmployeeService} from "../service/employee.service";
-import {Employee} from "../model/employee";
+
+import { Component } from '@angular/core';
+import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NgFor, AsyncPipe, DatePipe } from '@angular/common';
+import { EmployeeService } from '../service/employee.service';
 
 @Component({
-    selector: 'app-employees',
-    templateUrl: './employees.component.html',
-    styleUrls: ['./employees.component.css'],
-    standalone: true,
-    imports: [RouterLink, NgFor, AsyncPipe, DatePipe]
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.css'],
+  standalone: true,
+  imports: [RouterLink, AsyncPipe, DatePipe, DecimalPipe]
 })
 export class EmployeesComponent {
-  constructor(protected employees: EmployeeService) {
-  }
-
-  identify(index: number, employee: Employee): string {
-    return employee.id;
-  }
+  constructor(protected employees: EmployeeService) {}
 }

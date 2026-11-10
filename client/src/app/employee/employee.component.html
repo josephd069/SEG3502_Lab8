@@ -1,55 +1,161 @@
-<a class="btn btn-primary" [routerLink]="['/employees']">Employee List</a>
-<div class="container">
-  <h1>Employee Entry Form</h1>
-  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-    <div class="mb-3">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" formControlName="name" required>
-      <div [hidden]="name.pristine || name.valid"
-           class="alert alert-danger">
-        Employee Name is required.
+
+<section class="page">
+
+  <div class="introduction">
+    <span class="sur-titre">FORMULAIRE D'ENREGISTREMENT</span>
+    <h1>Ajouter un employé</h1>
+    <p>
+      Renseignez les informations ci-dessous pour
+      ajouter un employé à la base de données.
+    </p>
+  </div>
+
+  <div class="carte">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+      <div class="grille-formulaire">
+
+        <div class="champ">
+          <label for="name">
+            Nom complet <span class="obligatoire">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            required
+            placeholder="Ex. : Camille Tremblay">
+
+          @if (name.invalid && (name.dirty || name.touched)) {
+            <p class="erreur-champ">
+              Le nom de l'employé est obligatoire.
+            </p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="dob">
+            Date de naissance <span class="obligatoire">*</span>
+          </label>
+          <input
+            type="date"
+            class="form-control"
+            id="dob"
+            formControlName="dateOfBirth"
+            required>
+
+          @if (dateOfBirth.invalid &&
+               (dateOfBirth.dirty || dateOfBirth.touched)) {
+            <p class="erreur-champ">
+              La date de naissance est obligatoire.
+            </p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="city">
+            Ville <span class="obligatoire">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            formControlName="city"
+            required
+            placeholder="Ex. : Ottawa">
+
+          @if (city.invalid && (city.dirty || city.touched)) {
+            <p class="erreur-champ">
+              La ville est obligatoire.
+            </p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="salary">
+            Salaire ($) <span class="obligatoire">*</span>
+          </label>
+          <input
+            type="number"
+            class="form-control"
+            id="salary"
+            formControlName="salary"
+            min="0"
+            step="0.01"
+            required>
+
+          @if (salary.invalid && (salary.dirty || salary.touched)) {
+            <p class="erreur-champ">
+              Veuillez saisir un salaire valide,
+              supérieur ou égal à zéro.
+            </p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="gender">Genre (facultatif)</label>
+          <select
+            class="form-select"
+            id="gender"
+            formControlName="gender">
+
+            <option value="">Non précisé</option>
+            <option value="M">Masculin</option>
+            <option value="F">Féminin</option>
+            <option value="X">Autre (X)</option>
+          </select>
+
+          @if (gender.invalid && (gender.dirty || gender.touched)) {
+            <p class="erreur-champ">
+              Choisissez une option proposée.
+            </p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="email">
+            Adresse courriel (facultatif)
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            placeholder="Ex. : camille&#64;exemple.ca">
+
+          @if (email.invalid && (email.dirty || email.touched)) {
+            <p class="erreur-champ">
+              L'adresse courriel n'est pas valide.
+            </p>
+          }
+        </div>
+
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="dob">Date of Birth:</label>
-      <input type="date" class="form-control" id="dob" formControlName="dateOfBirth" required >
-      <div [hidden]="dateOfBirth.pristine || dateOfBirth.valid"
-           class="alert alert-danger">
-        Date of birth is required.
+
+      @if (messageErreur) {
+        <p class="message-erreur" role="alert">
+          {{ messageErreur }}
+        </p>
+      }
+
+      <div class="actions-formulaire">
+        <span>
+          <span class="obligatoire">*</span>
+          Champs obligatoires
+        </span>
+
+        <button
+          type="submit"
+          class="bouton-principal"
+          [disabled]="employeeForm.invalid || envoiEnCours">
+
+          {{ envoiEnCours
+             ? 'Enregistrement...'
+             : "Enregistrer l'employé" }}
+        </button>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="city">City:</label>
-      <input type="text" class="form-control" id="city" required formControlName="city">
-      <div [hidden]="city.pristine || city.valid"
-           class="alert alert-danger">
-        City of employment is required.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="salary">Salary:</label>
-      <input type="number" class="form-control" id="salary" required step="0.01" formControlName="salary">
-      <div [hidden]="salary.pristine || salary.valid"
-           class="alert alert-danger">
-        Salary is required.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="gender">Gender:</label>
-      <input type="text" class="form-control" id="gender" formControlName="gender" placeholder="M, F or X">
-      <div [hidden]="gender.pristine || gender.valid"
-           class="alert alert-danger">
-        Gender should be M, F or X.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" formControlName="email">
-      <div [hidden]="email.pristine || email.valid"
-           class="alert alert-danger">
-        Wrong email format.
-      </div>
-    </div>
-    <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">Submit</button>
-  </form>
-</div>
+
+    </form>
+  </div>
+</section>

@@ -1,25 +1,89 @@
-<a class="btn btn-primary" [routerLink]="['/employee']">Add Employee</a>
-<div class="container">
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Date of birth</th>
-      <th scope="col">City</th>
-      <th scope="col">Salary</th>
-      <th scope="col">Gender</th>
-      <th scope="col">Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let emp of employees.$ | async; trackBy: identify">
-      <td>{{emp.name}}</td>
-      <td>{{emp.dateOfBirth | date :'d/MMM/y'}}</td>
-      <td>{{emp.city}}</td>
-      <td>{{emp.salary}}</td>
-      <td>{{emp.gender}}</td>
-      <td>{{emp.email}}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+
+<section class="page">
+
+  <div class="introduction introduction-liste">
+    <div>
+      <span class="sur-titre">RÉPERTOIRE DU PERSONNEL</span>
+      <h1>Liste des employés</h1>
+      <p>
+        Consultez les employés enregistrés
+        dans la base de données MongoDB.
+      </p>
+    </div>
+
+    <a class="bouton-principal"
+       [routerLink]="['/employee']">
+      + Ajouter un employé
+    </a>
+  </div>
+
+  <div class="carte carte-tableau">
+
+    @if (employees.$ | async; as liste) {
+
+      @if (liste.length === 0) {
+
+        <div class="etat-vide">
+          <div class="icone-vide" aria-hidden="true">👥</div>
+          <h2>Aucun employé enregistré</h2>
+          <p>
+            Utilisez le formulaire pour ajouter
+            votre premier employé.
+          </p>
+          <a class="bouton-secondaire"
+             [routerLink]="['/employee']">
+            Ouvrir le formulaire
+          </a>
+        </div>
+
+      } @else {
+
+        <div class="en-tete-tableau">
+          <h2>Employés enregistrés</h2>
+          <span class="compteur">
+            {{ liste.length }} employé(s)
+          </span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table tableau-employes">
+            <thead>
+              <tr>
+                <th scope="col">Nom complet</th>
+                <th scope="col">Date de naissance</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Salaire ($)</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Courriel</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (emp of liste; track emp.id) {
+                <tr>
+                  <td><strong>{{ emp.name }}</strong></td>
+                  <td>
+                    {{ emp.dateOfBirth | date:'dd/MM/yyyy' }}
+                  </td>
+                  <td>{{ emp.city }}</td>
+                  <td>
+                    {{ emp.salary | number:'1.2-2' }}
+                  </td>
+                  <td>
+                    {{ emp.gender === 'M' ? 'Masculin'
+                       : emp.gender === 'F' ? 'Féminin'
+                       : emp.gender === 'X' ? 'Autre (X)'
+                       : 'Non précisé' }}
+                  </td>
+                  <td>{{ emp.email || '—' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+      }
+
+    }
+  </div>
+</section>
